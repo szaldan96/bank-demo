@@ -7,7 +7,7 @@ public class Account {
 
     private String name;
     private int balance;
-    private List<Transaction> transactionList = new ArrayList<>();
+    private final List<Transaction> transactionList = new ArrayList<>();
 
     public Account(String name) {
         this.name = name;
@@ -22,12 +22,12 @@ public class Account {
         return balance;
     }
 
-    public void deposit(int amount){
-        this.balance = this.balance+amount;
+    public void deposit(int amount) {
+        this.balance = this.balance + amount;
     }
 
-    public void withdraw(int amount){
-        this.balance = this.balance-amount;
+    public void withdraw(int amount) {
+        this.balance = this.balance - amount;
     }
 
     public void setBalance(int balance) {
@@ -45,7 +45,5 @@ public class Account {
     public List<Transaction> getTransactionList() {
         return transactionList;
     }
-
-
 
 }

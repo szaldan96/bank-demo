@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 
 public class Transaction {
 
-    private Account recipitent;
-    private Account sender;
-    private int amount;
-    private int balanceAfterTr;
-    private LocalDateTime date;
+    private final Account recipitent;
+    private final Account sender;
+    private final int amount;
+    private final int balanceAfterTr;
+    private final LocalDateTime date;
 
     public Transaction(Account recipitent, Account sender, int amount, int balanceAfterTr) {
         this.recipitent = recipitent;

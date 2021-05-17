@@ -9,7 +9,6 @@ public class Bank {
     private Account activeAccount;
     private List<Account> bankAccounts = new ArrayList<>();
 
-
     public Bank() {
         menu();
     }
@@ -19,7 +18,7 @@ public class Bank {
             System.out.println("Balance: " + activeAccount.getBalance());
         }
 
-        System.out.println("Login: '1', register: '2', Deposit: '3', Withdraw: '4', Transfer: '5', Transaction history: '6'");
+        System.out.println("Login: '1', Register: '2', Deposit: '3', Withdraw: '4', Transfer: '5', Transaction history: '6' Logout: '0'");
 
         String input = getUserInput();
 
@@ -35,14 +34,28 @@ public class Bank {
             transfer();
         } else if (input.equals("6")) {
             history();
+        }else if (input.equals("0")) {
+            logout();
         } else {
             menu();
         }
     }
 
+    private void logout() {
+        activeAccount = null;
+        menu();
+    }
+
     private void history() {
         for (Transaction t : activeAccount.getTransactionList()) {
-            System.out.println("Date: " + t.getDate() + "\nAmount: " + t.getAmount() + "\nBalance after transaction: " + t.getBalanceAfterTr());
+            String direction = "";
+            if (t.getSender() == activeAccount) {
+                direction = "Sender";
+            } else {
+                direction = "Recipient";
+            }
+
+            System.out.println("Date: " + t.getDate() + "\nAmount: " + t.getAmount() + "\nBalance after transaction: " + t.getBalanceAfterTr() + "\nDirection: " + direction);
         }
     }
 
@@ -54,7 +67,7 @@ public class Bank {
         Account recipient = bankAccounts.stream().filter(account -> recipientName.equals(account.getName())).findAny().orElse(null);
 
         if (recipient == null) {
-            System.out.println("no such account!");
+            System.out.println("No such account!");
         } else {
             System.out.println("Enter amount: ");
             amount = Integer.parseInt(getUserInput());
